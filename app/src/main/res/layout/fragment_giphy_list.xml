@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.giphyserach.GiphySearchFragment">
+
+    <EditText
+        android:id="@+id/searchET"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableStart="@android:drawable/ic_menu_search"
+        android:ems="24"
+        android:hint="@string/search_hint"
+        android:inputType="textAutoCorrect|text"
+        android:lines="1"
+        android:padding="@dimen/dimen_12_dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.467"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="Autofill,LabelFor,MissingConstraints"
+        tools:layout_editor_absoluteY="3dp" />
+
+    <ProgressBar
+        android:id="@+id/progress_circular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ViewStub
+
+        android:id="@+id/stubEmptyView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inflatedId="@+id/panel_import"
+        android:layout="@layout/empty_view"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/giphyRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/dimen_64_dp"
+        app:layoutManager="LinearLayoutManager"
+        tools:layout_editor_absoluteX="@dimen/dimen_120_dp"
+        tools:layout_editor_absoluteY="@dimen/dimen_0_dp"
+        tools:listitem="@layout/fragment_giphy" />
+</androidx.constraintlayout.widget.ConstraintLayout>

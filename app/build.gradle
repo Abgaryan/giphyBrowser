@@ -1,0 +1,70 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion Integer.parseInt(ANDROID_COMPILE_SDK_VERSION)
+    buildToolsVersion ANDROID_BUILD_TOOLS_VERSION
+    defaultConfig {
+        applicationId "com.matso.giphybrowser"
+        minSdkVersion Integer.parseInt(ANDROID_MIN_SDK_VERSION)
+        targetSdkVersion Integer.parseInt(ANDROID_TARGET_SDK_VERSION)
+        versionCode Integer.parseInt(VERSION_CODE)
+        versionName VERSION_NAME
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    implementation "androidx.constraintlayout:constraintlayout:$constraitLayout"
+    implementation "com.google.android.material:material:$material"
+    implementation "androidx.recyclerview:recyclerview:$recyclerView"
+
+    implementation 'androidx.core:core-ktx:1.2.0'
+    api "androidx.lifecycle:lifecycle-viewmodel-ktx:$architectureComponents"
+
+    //di
+    implementation "org.koin:koin-android:$koinVersion"
+    implementation "org.koin:koin-androidx-viewmodel:$koinVersion"
+    implementation "org.koin:koin-androidx-scope:$koinVersion"
+
+    implementation "io.reactivex.rxjava2:rxkotlin:$rxKotlin"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxAndroid"
+
+    implementation "com.github.bumptech.glide:glide:$glide"
+    annotationProcessor "com.github.bumptech.glide:compiler:$glide"
+
+
+    //networking
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp3LogInterceptor"
+
+    //coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
+
+
+
+    testImplementation "junit:junit:$junit"
+    androidTestImplementation "androidx.test.ext:junit:$test"
+    androidTestUtil "androidx.test:orchestrator:$test"
+    testImplementation "io.mockk:mockk:$mockk"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesTest"
+    testImplementation "androidx.arch.core:core-testing:$coreTesting"
+    testImplementation "com.github.Abgaryan:LivedataTest:$liveDataTest"
+
+}

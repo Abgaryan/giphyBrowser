@@ -1,0 +1,53 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    ext.kotlin_version = KOTLIN_VERSION
+    ext {
+        kotlinVersion = KOTLIN_VERSION
+        coroutinesVersion = COROUTINES_VERSION
+
+        constraitLayout = CONSTRAINT_LAYOUT
+        material =  MATERIAL
+        recyclerView = RECYCLERVIEW
+        coreKtx = CORE_KTX
+        
+        koinVersion = KOIN_VERSION
+        retrofitVersion = RETROFIT_VERSION
+        okhttp3LogInterceptor = OKHTTP3LOGINTERCEPTOR_VERSION
+        architectureComponents = ARHITECTURECOMPONENTS_VERSION
+        mockitoVersion = MOCKITO_VERSION
+        rxKotlin =RX_KOTLIN
+        rxAndroid =RX_ANDROID
+        glide = GLIDE
+        junit =JUNIT
+        test = TEST
+        mockk = MOCKK
+        coroutinesTest = COROUTINES_TEST
+        coreTesting = CORE_TESTING
+        liveDataTest = LIVEDATA_TEST
+
+    }
+    repositories {
+        google()
+        jcenter()
+
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.5.2'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven { url 'https://jitpack.io' }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
