@@ -3,7 +3,6 @@ package com.matso.giphybrowser.ui.giphyserach
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -18,35 +17,35 @@ class GiphyRecyclerViewAdapter(
 ) : ListAdapter<Giphy, GiphyRecyclerViewAdapter.ViewHolder>(GIPHY_COMPARATOR) {
 
 
-    private val clickListener: View.OnClickListener
-
-    init {
-        clickListener = View.OnClickListener { v ->
-            val item = v.tag as Giphy
-            listener?.onListFragmentInteraction(item.images.previewGif.url)
-        }
-    }
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.fragment_giphy, parent, false)
-        return ViewHolder(view)
+        return ViewHolder(view, listener)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = getItem(position)
-        Glide.with(holder.giphyImV.context).asGif().load(item.images.previewGif.url)
-            .into(holder.giphyImV)
-        with(holder.view) {
-            tag = item
-            setOnClickListener(clickListener)
-        }
+        holder.bind(getItem(position))
     }
 
 
-    inner class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
-        val giphyImV: ImageView = view.giphyImV
+    inner class ViewHolder(val view: View, itemClickListener: OnListFragmentInteractionListener?) :
+        RecyclerView.ViewHolder(view) {
+        private var giphy: Giphy? = null
+
+        init {
+            view.setOnClickListener { _ ->
+                giphy?.let {
+                    itemClickListener?.onListFragmentInteraction(it.images.previewGif.url)
+                }
+            }
+        }
+
+        fun bind(item: Giphy) = with(itemView) {
+            giphy = item
+            Glide.with(giphyImV.context).asGif().load(item.images.previewGif.url)
+                .into(giphyImV)
+
+        }
     }
 
     companion object {
